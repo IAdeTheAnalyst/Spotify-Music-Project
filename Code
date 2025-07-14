@@ -1,0 +1,105 @@
+-- How many songs are classified under each genre?
+/*
+select 
+	genre,
+	count(*) as "# of songs"
+from p.spotify
+group by genre
+*/
+-- Which artist has the highest average popularity across their songs?
+/*
+select 
+	artist_name,
+	round(avg(popularity),2) as "Average Popularity"
+from p.spotify
+group by artist_name
+order by "Average Popularity" desc
+limit 1
+*/
+-- What is the average energy level for songs that are longer than 3 minutes?
+/* select 
+	round(avg(energy),2) as  "Average Energy Leveel"
+from p.spotify
+where "length" > 180
+*/
+
+-- Which tracks have both high danceability (above 50) and high valence (above 75)?
+/*
+select 
+	track_name
+from p.spotify
+where danceability > 50 and valence > 75
+*/
+-- How many songs in the dataset have a loudness below -10 dB?
+/*
+select 
+	count(*) as "# of songs"
+from p.spotify
+where loudness_db < -10
+*/
+-- What is the average speechiness value for each genre?
+/*
+select 
+	genre,
+	round(avg(speechiness), 2) as "Average speechiness"
+from p.spotify
+group by genre
+*/
+-- What is the range of song lengths (shortest to longest) in the dataset?
+/*
+select 
+	min("length") as shortest,
+	max("length") as lonngest
+from p.spotify
+*/
+-- Which genres have the highest average acousticness?
+/*
+select
+	genre,
+	round(avg(acousticness),2) as "Average Acousticness"
+from p.spotify
+group by genre
+order by "Average Acousticness" desc
+*/
+-- How does average popularity differ between songs with high vs. low liveness?
+/*
+select 
+	round(avg(popularity) filter (where liveness >= 29),2) as High,
+	round(avg(popularity) filter (where liveness < 29),2) as Low
+from p.spotify
+*/
+-- Which artist appears most frequently in the dataset?
+/*
+select 
+	artist_name
+from p.spotify
+group by artist_name
+order by count(*)  desc
+limit 1
+*/
+
+-- What is the total number of songs where popularity is greater than 80?
+/*
+select 
+	count(*)
+from p.spotify
+where popularity > 80
+*/
+-- Which genres tend to have lower valence (more “sad” songs)?
+/*
+select 
+	genre,
+	round(avg(valence),2) as avg_valence
+from p.spotify
+group by genre
+order by avg_valence asc
+limit 10
+*/
+-- What is the average beats per minute (BPM) for each genre?
+/*
+select 
+	genre,
+	round(avg(beats_per_minute),0) as avg_bpm
+from p.spotify 
+group by genre 
+*/
